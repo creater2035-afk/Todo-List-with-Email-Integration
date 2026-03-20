@@ -17,7 +17,7 @@ body {
     justify-content: center;
     color: #2e2e2e;
     font-family: "Inter", sans-serif;
-    background-color: #fff;
+    background-color: #a7abc4b5;
 }
 
 .wrapper {
@@ -46,13 +46,13 @@ body {
 
 .screen-backdrop {
     width: 135%;
-    height: 25rem;
+    height: 15rem;
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 0 0 50% 50%;
-    background-color: #39a6f0;
+    background-color: #171a3a;
 
     z-index: -1;
     transition: all 0.3s;
@@ -72,6 +72,34 @@ body {
 
 .head-wrapper {
     padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-btn {
+    width: 3.9rem;
+    height: 3.9rem;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
 }
 
 .menu-btn {
@@ -80,23 +108,103 @@ body {
     color: #ffffff;
 }
 
-.welcome {
+.menu {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    width: 150px;
+}
+
+.menu a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu a:hover {
+    background-color: #555;
+}
+
+.show {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+}
+
+/* Toast Notification Styles */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: #171a3a;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease-out forwards;
+    opacity: 0;
+}
+
+.toast.removing {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+.toast-icon {
+    color: #39a6f0;
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.welcome {
+    padding: 0 30px;
+    margin-top: 1.5rem;
     color: #ffffff;
 }
 
 .welcome h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
 }
 
 .welcome p {
     font-weight: 500;
+    font-family: "Inter", sans-serif;
 }
 
 .welcome .img {
     position: relative;
+    
 }
 
 .welcome .img .backdrop {
@@ -109,6 +217,7 @@ body {
     border-radius: 50%;
     background-color: #e5e7fd;
     z-index: -1;
+    
 }
 
 .welcome .img img {
@@ -116,11 +225,36 @@ body {
 }
 
 .categories-wrapper {
-    margin-top: 1rem;
+    margin-top: 5rem;
     padding: 0 30px;
-    height: calc(100% - 8rem);
+    height: calc(100% - 14rem);
     padding-bottom: 20px;
     overflow: auto;
+}
+
+.categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.add-category-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(218, 95, 12, 0.823);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #e6e6e6;
+    transition: all 0.3s ease;
+}
+
+.add-category-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
 .categories {
@@ -130,8 +264,87 @@ body {
     gap: 1rem;
 }
 
+/* Voice assistant container placed below categories */
+    .voice-assistant-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5rem;
+        position: relative; /* contain waves */
+    }
+
+    .voice-assistant-wrapper button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* Wave circles */
+    .voice-assistant-wrapper .wave {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 100px;
+        border: 2px solid #ff4081;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s infinite;
+        opacity: 0.6;
+        margin: 0;
+    }
+    .voice-assistant-wrapper .wave:nth-child(1) { animation-delay: 0s; }
+    .voice-assistant-wrapper .wave:nth-child(2) { animation-delay: 0.5s; }
+    .voice-assistant-wrapper .wave:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes pulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+        70% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+        100% { opacity: 0; }
+    }
+
+    /* Mic button */
+    .voice-assistant-wrapper .mic-button {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        background: #ff4081;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 64, 129, 0.6);
+        transition: background 0.3s;
+        margin: 0;
+    }
+    .voice-assistant-wrapper .mic-button:hover {
+        background: #8b6a75;
+    }
+
+    /* text messages from voice assistant */
+    .voice-text {
+        text-align: center;
+        color: #171a3a;
+        font-weight: bolder;
+        margin-top: 4rem;
+    }
+    .voice-text.response {
+        color: #222652;
+        font-weight: normal;
+        margin-top: 0.5rem;
+    }
+
+.userText, .aiText p {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
 .category {
-    background: #fff;
+    background: hwb(0 100% 0% / 0.304);
     border-radius: 0.5rem;
     padding: 1.5rem 1rem;
     cursor: pointer;
@@ -155,6 +368,7 @@ body {
 
 .category .left img {
     width: 3rem;
+    border-radius: 50%;
 }
 
 .category .content h1 {
@@ -168,9 +382,20 @@ body {
 }
 
 .category .options {
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    /* Always visible */
+    visibility: visible;
     transition: all 0.3s;
+}
+
+/* Category screen header options */
+.category-screen .head-wrapper .options {
+    position: relative;
+}
+
+.category-screen .options-menu {
+    top: 3rem;
+    right: 0;
 }
 
 .category:hover .options {
@@ -186,6 +411,58 @@ body {
 
 .category .toggle-btn:hover {
     opacity: 1;
+}
+
+/* Category Options Menu */
+.category {
+    position: relative;
+    /* Ensure menu is positioned relative to card */
+}
+
+.options-menu {
+    position: absolute;
+    top: 4rem;
+    right: 1rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+.options-menu.active {
+    display: flex;
+}
+
+.options-menu button {
+    padding: 0.8rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2e2e2e;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.options-menu button:hover {
+    background: #f0f0f0;
+}
+
+.options-menu button.delete-cat {
+    color: #ff4d4d;
+}
+
+.options-menu button svg {
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
 
@@ -211,6 +488,7 @@ body {
 }
 
 .category-details img {
+    border-radius: 50%;
     width: 4rem;
 }
 
@@ -304,8 +582,9 @@ body {
     color: #2e2e2e;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.031);
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    /* Always visible */
+    visibility: visible;
     transition: all 0.3s;
 }
 
@@ -338,8 +617,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #39a6f0;
+    background-color: #2c3c47;
     transition: all 0.3s;
+}
+
+
+/* hide add button while viewing home screen */
+.wrapper:not(.show-category) .add-task-btn {
+    display: none;
 }
 
 .add-task-btn:hover {
@@ -357,16 +642,24 @@ body {
     color: #fff;
 }
 
-.add-task {
+.add-task,
+.add-category-modal,
+.settings-modal {
     position: absolute;
     bottom: -100%;
     left: 0;
     width: 100%;
-    padding: 20px 30px;
-    transition: all 0.3s;
+    padding: 2.5rem 2rem;
+    background-color: #ffffff;
+    border-radius: 3rem 3rem 0 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
 }
 
-.add-task.active {
+.add-task.active,
+.add-category-modal.active,
+.settings-modal.active {
     bottom: 0;
 }
 
@@ -422,9 +715,44 @@ body {
     z-index: 1;
 }
 
-button.add-btn {
+button.add-btn,
+button.test-email-btn {
     background-color: #39a6f0;
     color: #fff
+}
+
+button.test-email-btn {
+    background-color: #6366f1;
+    /* Different color to distinguish */
+}
+
+.input-group-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-group-row .input-group {
+    flex: 1;
+}
+
+.task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.task-schedule {
+    font-size: 0.7rem;
+    color: #666;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.task-schedule svg {
+    width: 0.8rem;
+    height: 0.8rem;
 }
 
 .add-task-backdrop {
@@ -435,7 +763,7 @@ button.add-btn {
     width: 135%;
     height: 20rem;
     border-radius: 50% 50% 0 0;
-    background-color: #fff;
+    background-color: hsla(0, 46%, 48%, 0.093);
 }
 
 .black-backdrop {
@@ -449,6 +777,92 @@ button.add-btn {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s;
+}
+
+/* Settings Modal */
+.settings-modal {
+    padding: 2.5rem 2rem;
+}
+
+.settings-modal.active {
+    bottom: 0;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 16px;
+}
+
+.profile-info img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.toggle-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.logout-btn {
+    background: #fee2e2 !important;
+    color: #ef4444 !important;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #6366f1;
+}
+
+input:checked+.slider:before {
+    transform: translateX(24px);
 }
 
 .black-backdrop.active {
